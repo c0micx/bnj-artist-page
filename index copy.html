@@ -1,25 +1,17 @@
-<body>
-  <nav>
-    <ul style="list-style: none; display: flex; justify-content: center; padding: 0;">
-      <li style="margin: 0 30px;"><a href="#BIG" style="text-decoration: none; color: white;">BIG</a></li>
-      <li style="margin: 0 30px;"><a href="#NUT" style="text-decoration: none; color: white;">NUT</a></li>
-      <li style="margin: 0 30px;"><a href="#JUICE" style="text-decoration: none; color: white;">JUICE</a></li>
-    </ul>
-  </nav>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
-    button:hover, a:hover {
-      color: #000000;
-      transition: color 0.3s;
-    }
-  </style>
-</head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BNJ - Artist Page</title>
   <style>
+    /* Hover effects */
+    button:hover, a:hover {
+      color: #b0abf5;
+      transition: color 0.3s;
+    }
+
+    /* General styles */
     body {
       margin: 0;
       padding: 0;
@@ -32,28 +24,71 @@
       justify-content: center;
       min-height: 100vh;
     }
+
+    /* Container */
     .container {
       text-align: center;
     }
+
+    /* Image styles */
     .artist-image {
       max-width: 75%;
       height: auto;
       border-radius: 100px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
+
+    /* Title styles */
     .title {
       margin-top: 20px;
       font-size: 2.5em;
       font-weight: bold;
     }
+
+    /* Description styles */
     .description {
       margin-top: 10px;
       font-size: 1.2em;
       color: #fff;
     }
+
+    /* Navigation menu styles */
+    nav ul {
+
+  position: relative; 
+  top: -15px; 
+  margin-bottom: 20px; 
+
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      color: #b0abf5;
+    }
   </style>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="#BIG">BIG</a></li>
+      <li><a href="#NUT">NUT</a></li>
+      <li><a href="#JUICE">JUICE</a></li>
+    </ul>
+  </nav>
   <div class="container">
     <img src="bnj.jpg" alt="BNJ Artist" class="artist-image">
     <h1 class="title">BIGNUTJUICE</h1>
@@ -61,4 +96,3 @@
   </div>
 </body>
 </html>
-
