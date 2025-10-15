@@ -5,73 +5,153 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BNJ - Artist Page</title>
   <style>
+    :root {
+      --bg: #8881e9;
+      --text: #ffffff;
+      --accent: #ffffff;
+      --accentText: #8881e9;
+      --cardBg: rgba(255,255,255,0.10);
+      --cardBorder: rgba(255,255,255,0.18);
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #8881e9;
-      color: #fff;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Page frame */
+    .page {
+      margin: 0 auto;
+      padding: 40px 24px;
+      width: min(1100px, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Hybrid layout: stacked by default, side-by-side on wide screens */
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      gap: 32px;
+      width: 100%;
     }
-    .container {
+    @media (min-width: 900px) {
+      .container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 48px;
+      }
+    }
+
+    /* Left: artist image */
+    .artist-section {
+      flex: 0 0 auto;
       text-align: center;
-      margin-top: 40px;
     }
     .artist-image {
-      max-width: 75%;
+      width: 280px;
+      max-width: 80vw;
       height: auto;
-      border-radius: 100px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      border-radius: 24px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+
+    /* Right: content */
+    .content-section {
+      flex: 1 1 420px;
+      max-width: 520px;
     }
     .title {
-      margin-top: 20px;
-      font-size: 2.5em;
-      font-weight: bold;
+      margin: 8px 0 4px;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: 0.3px;
     }
     .description {
-      margin-top: 10px;
-      font-size: 1.2em;
-      color: #fff;
+      margin: 6px 0 18px;
+      font-size: 1.05rem;
+      opacity: 0.95;
     }
+
     .bandcamp-btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 24px;
-      background-color: #fff;
-      color: #8881e9;
-      border-radius: 30px;
+      padding: 12px 20px;
+      background-color: var(--accent);
+      color: var(--accentText);
+      border-radius: 999px;
       font-weight: bold;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
     }
     .bandcamp-btn:hover {
+      transform: translateY(-1px);
       background-color: #000;
       color: #fff;
     }
-    button:hover, a:hover {
-      color: #000000;
-      transition: color 0.3s;
+
+    /* Player card */
+    .player-card {
+      margin-top: 16px;
+      background: var(--cardBg);
+      border: 1px solid var(--cardBorder);
+      backdrop-filter: blur(3px);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      width: 100%;
+      max-width: 420px;
+    }
+    .player-card iframe {
+      display: block;
+      width: 100%;
+      height: 470px;
+      border: 0;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="bnj.jpg" alt="BNJ Artist" class="artist-image">
-    <h1 class="title">BIGNUTJUICE</h1>
-    <p class="description">CEO of BNJ Inc.</p>
-    <a href="https://bignutjuice.bandcamp.com/" target="_blank" class="bandcamp-btn">Listen on Bandcamp</a>
-    <iframe style="border:0; width:350px; height:470px; margin-top:20px;"
-      src="https://bignutjuice.bandcamp.com/track/shame">
-    </iframe>
-  </div>
+  <main class="page">
+    <section class="container">
+      <!-- Left: photo -->
+      <div class="artist-section">
+        <img src="bnj.jpg" alt="BNJ Artist photo" class="artist-image">
+      </div>
 
+      <!-- Right: name, role, CTA, player -->
+      <div class="content-section">
+        <h1 class="title">BIGNUTJUICE</h1>
+        <p class="description">CEO of BNJ Inc.</p>
+
+        <a href="https://bignutjuice.bandcamp.com/" target="_blank" rel="noopener" class="bandcamp-btn">
+          Listen on Bandcamp
+        </a>
+
+        <div class="player-card">
+          <!-- Use Bandcamp’s embed URL when you have it; this placeholder will still show the track page -->
+          <iframe
+            src="https://bignutjuice.bandcamp.com/track/shame"
+            title="Bandcamp player">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cache-buster so you always see fresh content after deploy -->
   <script>
-    if (window.location.href.indexOf('v=') === -1) {
-      window.location.href = window.location.href + '?v=' + new Date().getTime();
+    if (window.location.search.indexOf('v=') === -1) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('v', Date.now());
+      window.location.replace(url.toString());
     }
   </script>
 </body>
