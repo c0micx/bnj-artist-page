@@ -36,6 +36,21 @@
       font-size: 1.2em;
       color: #fff;
     }
+    .bandcamp-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #fff;
+      color: #8881e9;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .bandcamp-btn:hover {
+      background-color: #000;
+      color: #fff;
+    }
     button:hover, a:hover {
       color: #000000;
       transition: color 0.3s;
@@ -67,7 +82,13 @@
     <img src="bnj.jpg" alt="BNJ Artist" class="artist-image">
     <h1 class="title">BIGNUTJUICE</h1>
     <p class="description">CEO of BNJ Inc.</p>
+    <a href="https://bignutjuice.bandcamp.com/" target="_blank" class="bandcamp-btn">Listen on Bandcamp</a>
+    <iframe style="border:0; width:350px; height:470px; margin-top:20px;"
+      src="https://bignutjuice.bandcamp.com/track/shame">
+    </iframe>
   </div>
 </body>
 </html>
-
+git rev-parse --show-toplevel
+git status
+git log -1 --stat
