@@ -87,5 +87,11 @@
       src="https://bignutjuice.bandcamp.com/track/shame">
     </iframe>
   </div>
+
+  <script>
+    if (window.location.href.indexOf('v=') === -1) {
+      window.location.href = window.location.href + '?v=' + new Date().getTime();
+    }
+  </script>
 </body>
 </html>
