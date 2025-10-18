@@ -116,6 +116,24 @@
       border: 0;
       border-radius: 10px;
     }
+
+    /* Players layout: stack on mobile, side-by-side on desktop */
+    .players {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+    @media (min-width: 900px) {
+      .players {
+        grid-template-columns: 1fr 1fr;
+        align-items: stretch;
+      }
+    }
+    /* Allow full width inside the grid */
+    .players .player-card {
+      max-width: none;
+    }
   </style>
 </head>
 <body>
@@ -135,15 +153,26 @@
           Listen on Bandcamp
         </a>
 
-        <div class="player-card">
-          <!-- Use Bandcamp’s embed URL when you have it; this placeholder will still show the track page -->
-          <iframe
-            src="https://bignutjuice.bandcamp.com/track/shame"
-            title="Bandcamp Player">
-          </iframe>
-        </div>
-        <div class="player-card">
-          <iframe style="border-radius: 24px" src="https://untitled.stream/embed/SCe4Fz9fWe0t" width="100%" height="344" allowFullScreen="" allow="picture-in-picture" frameborder="0" loading="lazy"></iframe>
+        <div class="players">
+          <div class="player-card">
+            <!-- Use Bandcamp’s embed URL when you have it; this placeholder will still show the track page -->
+            <iframe
+              src="https://bignutjuice.bandcamp.com/track/shame"
+              title="Bandcamp Player">
+            </iframe>
+          </div>
+
+          <div class="player-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <div>
+                <div style="font-weight:700; margin-bottom:6px;">More music on Untitled</div>
+                <div style="opacity:.9; font-size:.95rem;">Opens in a new tab</div>
+              </div>
+              <a href="https://untitled.stream/embed/SCe4Fz9fWe0t"
+                 target="_blank" rel="noopener"
+                 class="bandcamp-btn">Listen on Untitled</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
