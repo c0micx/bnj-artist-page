@@ -184,11 +184,30 @@
 
   <!-- Cache-buster so you always see fresh content after deploy -->
   <script>
-    if (window.location.search.indexOf('v=') === -1) {
+    // Cache-bust the page URL once
+    (function () {
       const url = new URL(window.location.href);
-      url.searchParams.set('v', Date.now());
-      window.location.replace(url.toString());
-    }
+      if (!url.searchParams.has('v')) {
+        url.searchParams.set('v', Date.now());
+        return window.location.replace(url.toString());
+      }
+    })();
+    // Cache-bust same-origin images so new uploads show immediately
+    (function () {
+      const version = Date.now();
+      document.querySelectorAll('img').forEach(img => {
+        const src = img.getAttribute('src');
+        if (!src) return;
+        try {
+          const u = new URL(src, window.location.href);
+          // only touch same-origin files and skip if already versioned
+          if (u.origin === window.location.origin && !u.searchParams.has('v')) {
+            u.searchParams.set('v', version);
+            img.src = u.toString();
+          }
+        } catch (e) {}
+      });
+    })();
   </script>
 </body>
 </html>
