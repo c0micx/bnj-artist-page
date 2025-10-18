@@ -178,6 +178,44 @@
       justify-content: center;
       overflow: hidden;
     }
+
+    /* Collage style on desktop: slight tilt + overlap */
+    @media (min-width: 900px) {
+      .players {
+        position: relative;
+        display: block;                 /* override grid for desktop */
+        height: calc(var(--mediaCardHeight) + 100px); /* room for stagger */
+      }
+      .players .player-card,
+      .players .screenshot-card {
+        position: absolute;
+        width: 48%;
+        max-width: none;
+        height: var(--mediaCardHeight); /* ensure equal heights */
+      }
+      /* Left card: Bandcamp */
+      .players .player-card {
+        left: 0;
+        top: 0;
+        transform: rotate(-1.75deg);
+      }
+      /* Right card: Untitled */
+      .players .screenshot-card {
+        right: 0;
+        top: 48px;
+        transform: rotate(2.5deg);
+      }
+      /* Extra depth shadow */
+      .players .player-card::after,
+      .players .screenshot-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        box-shadow: 0 30px 40px rgba(0,0,0,0.28);
+        z-index: -1;
+      }
+    }
   </style>
 </head>
 <body>
