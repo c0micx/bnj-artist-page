@@ -134,6 +134,51 @@
     .players .player-card {
       max-width: none;
     }
+
+    /* New styles for album-cover style cards */
+    .music-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: var(--cardBg);
+      border: 1px solid var(--cardBorder);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .music-card:hover {
+      transform: scale(1.02);
+    }
+    .music-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      filter: brightness(0.8);
+      transition: filter 0.3s ease;
+    }
+    .music-card:hover .music-cover {
+      filter: brightness(1);
+    }
+    .play-button {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--accentText);
+      transition: background 0.3s ease;
+    }
+    .music-card:hover .play-button {
+      background: rgba(255,255,255,1);
+    }
   </style>
 </head>
 <body>
@@ -154,25 +199,15 @@
         </a>
 
         <div class="players">
-          <div class="player-card">
-            <!-- Use Bandcamp’s embed URL when you have it; this placeholder will still show the track page -->
-            <iframe
-              src="https://bignutjuice.bandcamp.com/track/shame"
-              title="Bandcamp Player">
-            </iframe>
-          </div>
+          <a href="https://bignutjuice.bandcamp.com/track/shame" target="_blank" rel="noopener" class="music-card">
+            <img src="bnj-bandcamp-cover.jpg" alt="Bandcamp track cover" class="music-cover">
+            <div class="play-button">▶</div>
+          </a>
 
-          <div class="player-card">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-              <div>
-                <div style="font-weight:700; margin-bottom:6px;">More music on Untitled</div>
-                <div style="opacity:.9; font-size:.95rem;">Opens in a new tab</div>
-              </div>
-              <a href="https://untitled.stream/embed/SCe4Fz9fWe0t"
-                 target="_blank" rel="noopener"
-                 class="bandcamp-btn">Listen on Untitled</a>
-            </div>
-          </div>
+          <a href="https://untitled.stream/embed/SCe4Fz9fWe0t" target="_blank" rel="noopener" class="music-card">
+            <img src="bnj-untitled-cover.jpg" alt="Untitled music cover" class="music-cover">
+            <div class="play-button">▶</div>
+          </a>
         </div>
       </div>
     </section>
