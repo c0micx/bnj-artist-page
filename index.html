@@ -217,6 +217,28 @@
       }
     }
   </style>
+  /* Personalized gradient overlays for each media card */
+  .players .player-card::before,
+  .players .screenshot-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    z-index: 0;
+    opacity: 0.85;
+    mix-blend-mode: overlay;
+  }
+  .players .player-card::before {
+    background: linear-gradient(135deg, rgba(136,129,233,0.45), rgba(255,255,255,0.05));
+  }
+  .players .screenshot-card::before {
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(136,129,233,0.45));
+  }
+  .players .player-card iframe,
+  .players .screenshot-card img {
+    position: relative;
+    z-index: 1;
+  }
 </head>
 <body>
   <main class="page">
