@@ -12,7 +12,7 @@
       --accentText: #8881e9;
       --cardBg: rgba(255,255,255,0.10);
       --cardBorder: rgba(255,255,255,0.18);
-      --mediaCardHeight: 520px;
+      --mediaCardHeight: 460px;
     }
 
     body {
@@ -115,7 +115,8 @@
       width: 100%;
       height: 100%;
       border: 0;
-      border-radius: 16px 16px 16px 16px;
+      border-radius: 16px;
+      object-fit: cover;
     }
 
     /* Players layout: stack on mobile, side-by-side on desktop */
@@ -147,6 +148,7 @@
       object-fit: cover;
       width: 100%;
       height: 100%;
+      border-radius: 16px;
     }
 
     /* Simple screenshot card styles to match the player look */
@@ -168,6 +170,13 @@
       .players .screenshot-card {
         height: var(--mediaCardHeight);
       }
+    }
+    .players .player-card,
+    .players .screenshot-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
   </style>
 </head>
