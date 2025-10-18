@@ -135,49 +135,19 @@
       max-width: none;
     }
 
-    /* New styles for album-cover style cards */
-    .music-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
+    /* Simple screenshot card styles to match the player look */
+    .screenshot-card {
+      display: block;
       background: var(--cardBg);
       border: 1px solid var(--cardBorder);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-    }
-    .music-card:hover {
-      transform: scale(1.02);
-    }
-    .music-cover {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       border-radius: 16px;
-      filter: brightness(0.8);
-      transition: filter 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      overflow: hidden;
     }
-    .music-card:hover .music-cover {
-      filter: brightness(1);
-    }
-    .play-button {
-      position: absolute;
-      width: 60px;
-      height: 60px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: var(--accentText);
-      transition: background 0.3s ease;
-    }
-    .music-card:hover .play-button {
-      background: rgba(255,255,255,1);
+    .screenshot-card img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
   </style>
 </head>
@@ -194,19 +164,17 @@
         <h1 class="title">BIGNUTJUICE</h1>
         <p class="description">CEO of BNJ Inc.</p>
 
-        <a href="https://bignutjuice.bandcamp.com/" target="_blank" rel="noopener" class="bandcamp-btn">
-          Listen on Bandcamp
-        </a>
-
         <div class="players">
-          <a href="https://bignutjuice.bandcamp.com/track/shame" target="_blank" rel="noopener" class="music-card">
-            <img src="broke.jpg" alt="Bandcamp track cover" class="music-cover">
-            <div class="play-button">▶</div>
-          </a>
-
-          <a href="https://untitled.stream/" target="_blank" rel="noopener" class="music-card">
-            <img src="Screenshot-2025-10-18-at-5.41.03-PM.png" alt="Untitled music cover" class="music-cover">
-            <div class="play-button">▶</div>
+          <div class="player-card">
+            <!-- Bandcamp artist profile in an iframe (single link via the player area) -->
+            <iframe
+              src="https://bignutjuice.bandcamp.com/"
+              title="Bandcamp Artist"
+              loading="lazy">
+            </iframe>
+          </div>
+          <a href="https://untitled.stream/" target="_blank" rel="noopener" class="screenshot-card" aria-label="Open Untitled in a new tab">
+            <img src="Screenshot-2025-10-18-at-5.41.03-PM.png" alt="Untitled music screenshot">
           </a>
         </div>
       </div>
