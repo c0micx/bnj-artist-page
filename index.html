@@ -12,6 +12,7 @@
       --accentText: #8881e9;
       --cardBg: rgba(255,255,255,0.10);
       --cardBorder: rgba(255,255,255,0.18);
+      --mediaCardHeight: 520px;
     }
 
     body {
@@ -104,7 +105,7 @@
       border: 1px solid var(--cardBorder);
       backdrop-filter: blur(3px);
       border-radius: 16px;
-      padding: 14px;
+      padding: 0;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       width: 100%;
       max-width: 420px;
@@ -112,9 +113,9 @@
     .player-card iframe {
       display: block;
       width: 100%;
-      height: 470px;
+      height: 100%;
       border: 0;
-      border-radius: 10px;
+      border-radius: 16px 16px 16px 16px;
     }
 
     /* Players layout: stack on mobile, side-by-side on desktop */
@@ -137,15 +138,15 @@
 
     /* Better spacing and consistent height for players */
     .players {
-      gap: 32px;
+      gap: 56px;
     }
     .players iframe {
-      height: 420px;
+      height: 100%;
     }
     .screenshot-card img {
       object-fit: cover;
       width: 100%;
-      height: 420px;
+      height: 100%;
     }
 
     /* Simple screenshot card styles to match the player look */
@@ -161,6 +162,12 @@
       display: block;
       width: 100%;
       height: auto;
+    }
+    @media (min-width: 900px) {
+      .players .player-card,
+      .players .screenshot-card {
+        height: var(--mediaCardHeight);
+      }
     }
   </style>
 </head>
