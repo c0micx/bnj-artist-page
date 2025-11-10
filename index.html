@@ -242,9 +242,25 @@
     .players .screenshot-card { z-index: 1; }
     .players .player-card::before {
       background: linear-gradient(135deg, rgba(136,129,233,0.45), rgba(255,255,255,0.05));
+      bottom: 8%; /* lift gradient overlay slightly for better fit */
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
     }
     .players .screenshot-card::before {
       background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(136,129,233,0.45));
+      bottom: 6%; /* lift gradient overlay up from the bottom */
+      top: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      border-radius: 16px;
+      content: "";
+      z-index: 0;
+      opacity: 0.55;
+      mix-blend-mode: overlay;
+      pointer-events: none;
     }
     .players .player-card iframe,
     .players .screenshot-card img {
