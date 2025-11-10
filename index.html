@@ -170,37 +170,18 @@
     .screenshot-card img {
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;          /* fit image naturally */
+      object-fit: contain;   /* best-fit without cropping */
     }
     @media (min-width: 900px) {
-      .players .player-card,
-      .players .screenshot-card {
-        height: var(--mediaCardHeight);
-      }
+      .players .player-card { height: 420px; }
+      .players .screenshot-card { height: auto; }
     }
+    /* Clipped hitboxes only; no forced uniform aspect ratios */
     .players .player-card,
     .players .screenshot-card {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      clip-path: inset(0 round 16px);
     }
-    /* Uniform sizing and clipped hitboxes */
-    .players .player-card,
-    .players .screenshot-card {
-      aspect-ratio: var(--mediaAspect);
-      clip-path: inset(0 round 16px); /* clickable area matches rounded card */
-    }
-    @media (min-width: 900px) {
-      .players .player-card,
-      .players .screenshot-card {
-        height: var(--mediaCardHeight);
-        aspect-ratio: auto; /* desktop uses fixed height */
-      }
-    }
-
-    /* Collage style on desktop: slight tilt + overlap */
     @media (min-width: 900px) {
       .players {
         position: relative;
@@ -212,8 +193,9 @@
         position: absolute;
         width: 48%;
         max-width: none;
-        height: var(--mediaCardHeight); /* ensure equal heights */
       }
+      .players .player-card { height: 420px; }
+      /* screenshot-card height is auto to fit image */
       /* Left card: Bandcamp */
       .players .player-card {
         left: 0;
