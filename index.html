@@ -130,6 +130,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       width: 100%;
       max-width: 420px;
+      overflow: hidden;
     }
     .player-card iframe {
       display: block;
@@ -242,7 +243,7 @@
     .players .screenshot-card { z-index: 1; }
     .players .player-card::before {
       background: linear-gradient(135deg, rgba(136,129,233,0.45), rgba(255,255,255,0.05));
-      bottom: 8%; /* lift gradient overlay slightly for better fit */
+      bottom: -12px; /* lift gradient overlay slightly for better fit */
       top: 0;
       left: 0;
       right: 0;
