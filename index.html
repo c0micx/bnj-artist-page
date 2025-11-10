@@ -170,7 +170,8 @@
     .screenshot-card img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
     }
     @media (min-width: 900px) {
       .players .player-card,
@@ -245,9 +246,18 @@
       inset: 0;
       border-radius: 16px;
       z-index: 0;
-      opacity: 0.85;
+      opacity: 0.55;
       mix-blend-mode: overlay;
     }
+    /* Prevent overlay layers from blocking clicks and control z-order */
+    .players .player-card::before,
+    .players .player-card::after,
+    .players .screenshot-card::before,
+    .players .screenshot-card::after {
+      pointer-events: none;
+    }
+    .players .player-card { z-index: 2; }
+    .players .screenshot-card { z-index: 1; }
     .players .player-card::before {
       background: linear-gradient(135deg, rgba(136,129,233,0.45), rgba(255,255,255,0.05));
     }
