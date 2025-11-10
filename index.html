@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BNJ – artist page with embedded Bandcamp track and links.">
+  <link rel="icon" href="favicon.ico">
+  <!-- Social cards -->
+  <meta property="og:title" content="BNJ – Artist Page">
+  <meta property="og:description" content="Listen to BNJ and explore more music.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="bnj.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BNJ – Artist Page">
+  <meta name="twitter:description" content="Listen to BNJ and explore more music.">
+  <meta name="twitter:image" content="bnj.jpg">
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://bandcamp.com" crossorigin>
+  <link rel="preload" as="image" href="bnj.jpg">
   <title>BNJ - Artist Page</title>
   <style>
     :root {
@@ -98,6 +112,11 @@
       background-color: #000;
       color: #fff;
     }
+    .bandcamp-btn:focus-visible,
+    .screenshot-card:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
 
     /* Player card */
     .player-card {
@@ -105,6 +124,7 @@
       background: var(--cardBg);
       border: 1px solid var(--cardBorder);
       backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
       border-radius: 16px;
       padding: 0;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
@@ -117,16 +137,16 @@
       height: 100%;
       border: 0;
       border-radius: 16px;
-      object-fit: cover;
     }
 
     /* Players layout: stack on mobile, side-by-side on desktop */
     .players {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 56px;
       width: 100%;
     }
+    .players iframe { height: 100%; }
     @media (min-width: 900px) {
       .players {
         grid-template-columns: 1fr 1fr;
@@ -136,20 +156,6 @@
     /* Allow full width inside the grid */
     .players .player-card {
       max-width: none;
-    }
-
-    /* Better spacing and consistent height for players */
-    .players {
-      gap: 56px;
-    }
-    .players iframe {
-      height: 100%;
-    }
-    .screenshot-card img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
     }
 
     /* Simple screenshot card styles to match the player look */
@@ -253,6 +259,13 @@
       position: relative;
       z-index: 1;
     }
+    @media (prefers-reduced-motion: reduce) {
+      .players .player-card,
+      .players .screenshot-card { transform: none !important; }
+      .players .player-card::after,
+      .players .screenshot-card::after { box-shadow: none !important; }
+      .bandcamp-btn { transition: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -260,7 +273,7 @@
     <section class="container">
       <!-- Left: photo -->
       <div class="artist-section">
-        <img src="bnj.jpg" alt="BNJ Artist photo" class="artist-image">
+        <img src="bnj.jpg" alt="BNJ Artist photo" class="artist-image" loading="eager" fetchpriority="high" decoding="async">
       </div>
 
       <!-- Right: name, role, CTA, player -->
@@ -271,14 +284,14 @@
         <div class="players">
           <div class="player-card">
             <!-- Bandcamp embedded track player -->
-            <iframe style="border:0;width:100%;height:100%;"
+            <iframe title="Bandcamp player: shame by BigNutJuice" loading="lazy" allow="autoplay; encrypted-media" style="border:0;width:100%;height:100%;"
               src="https://bandcamp.com/EmbeddedPlayer/track=4050302961/size=large/bgcol=333333/linkcol=e32c14/tracklist=false/transparent=true/"
               seamless>
               <a href="https://bignutjuice.bandcamp.com/track/shame">shame by BigNutJuice</a>
             </iframe>
           </div>
-          <a href="https://untitled.stream/" target="_blank" rel="noopener" class="screenshot-card" aria-label="Open Untitled in a new tab">
-            <img src="untitled.jpg" alt="Untitled music screenshot"
+          <a href="https://untitled.stream/" target="_blank" rel="noopener" class="screenshot-card" aria-label="Open Untitled in a new tab" tabindex="0">
+            <img src="untitled.jpg" alt="Untitled music screenshot" loading="lazy" decoding="async"
                  onerror="this.onerror=null; this.src='untitled-cover.png';">
           </a>
         </div>
@@ -288,23 +301,21 @@
 
   <!-- Cache-buster so you always see fresh content after deploy -->
   <script>
-    // Cache-bust the page URL once
-    (function () {
-      const url = new URL(window.location.href);
-      if (!url.searchParams.has('v')) {
-        url.searchParams.set('v', Date.now());
-        return window.location.replace(url.toString());
-      }
-    })();
-    // Cache-bust same-origin images so new uploads show immediately
     (function () {
       const version = Date.now();
+      // Cache-bust the page URL once
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has('v')) {
+        url.searchParams.set('v', version);
+        window.location.replace(url.toString());
+        return;
+      }
+      // Cache-bust same-origin images so new uploads show immediately
       document.querySelectorAll('img').forEach(img => {
         const src = img.getAttribute('src');
         if (!src) return;
         try {
           const u = new URL(src, window.location.href);
-          // only touch same-origin files and skip if already versioned
           if (u.origin === window.location.origin && !u.searchParams.has('v')) {
             u.searchParams.set('v', version);
             img.src = u.toString();
